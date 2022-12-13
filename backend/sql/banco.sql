@@ -41,4 +41,4 @@ CREATE TABLE vid(
     texto TEXT NOT NULL,
     vid VARCHAR(100) NOT NULL,
     PRIMARY KEY (id)
-)
+);

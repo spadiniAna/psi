@@ -56,19 +56,14 @@
                 <a class="nav-link text-light" href="../backend/logout.php">Sair</a>
             </div>
 
-            <?php  
-            
-            if(isset($_SESSION['adm'])){
-                if($_SESSION['adm'] === true){
-                    ?>
             <div class="vr text-light"></div>
             <div class="nav-item">
                 <a class="nav-link text-light" href="cadastro.php">Cadastrar</a>
             </div>
 
-                <?php
-                }}}}
-                ?>
+            <?php  
+            }}
+            ?>
         </div>
 
     </nav>

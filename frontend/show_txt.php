@@ -15,7 +15,6 @@ if(isset($_GET['id'])){
         $id = $p['id'];
         $titulo = $p['titulo'];
         $txt = $p['txt'];
-        $img = $p['img'];
 
       }
   }
@@ -43,10 +42,9 @@ if(isset($_GET['id'])){
                 <div class="container" style="margin-top: 20px;"> 
                     <div class="row">
                         <div  class="col-10 position-relative top-0 start-50 translate-middle-x">
-                            <h2 class="display-6" style="color: #458890; padding-left: 30px;"><?php  if(isset($titulo)){ echo $titulo; }  ?>
+                            <h2 class="display-6" style="color: #458890; padding-left: 30px;"><?php  if(isset($titulo)){ echo $titulo; }  ?></h2>
                             <hr style="color: #458890;">
                             <p style="text-align: justify; margin-left: 50px; margin-right: 50px;"><?php  if(isset($txt)){ echo $txt; }  ?></p>
-                            <img src="imagens/<?php  if(isset($img)){ echo $img; } ?>" alt="">
                             <hr style="color: #458890;">
                             <div class="">
                                 <a href="pag_paciente.php?id=<?php if(isset($id)){ echo $id; } ?>" class="btn mt-3" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">

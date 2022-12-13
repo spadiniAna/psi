@@ -48,11 +48,20 @@ if(isset($_GET['id'])){
                             <small class="text-muted" style="color: #458890; font-size: 25px;"><?php  if(isset($subtitulo)){ echo $subtitulo; }  ?></small></h2>
                             <hr style="color: #458890;">
                             <p style="text-align: justify; margin-left: 50px; margin-right: 50px;"><?php  if(isset($texto)){ echo $texto; }  ?></p>
-                            <img src="imagens/<?php  if(isset($img)){ echo $img; } ?>" alt="">
+                            <img class="position-relative top-0 start-50 translate-middle-x" src="imagens/<?php  if(isset($img)){ echo $img; } ?>" alt="">
                             <hr style="color: #458890;">
-                            <div class="">
-                                <a href="blog.php" class="btn mt-3" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
-                                Voltar</a>
+                            <div class="row">
+                                <div class="col-8">
+                                    <a href="blog.php" class="btn mt-3" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
+                                    Voltar</a>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <button href="excluir('<?php if(isset($id)){ echo $id; } ?>')" class="btn mt-3" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
+                                    Excluir</button>
+
+                                    <button onclick="editar('<?php if(isset($id)){ echo $id; } ?>')" class="btn mt-3" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
+                                    Editar</button>
+                                <div>
                             </div>
                         </div>
                     
@@ -63,5 +72,25 @@ if(isset($_GET['id'])){
         <?php
         include_once 'footer.php';
         ?>
+        
+        
+    <script>
+
+        function excluir(n){
+
+            let text = "Realmente deseja excluir?";
+            if (confirm(text) == true){
+                window.location = '../excluir_blog.php?id=' + n;
+            }
+        }
+
+        function editar(n){
+
+            window.location = 'criar_blog.php?id=' + n; 
+        }
+
+    </script>
+
+
     </body>
 </html>

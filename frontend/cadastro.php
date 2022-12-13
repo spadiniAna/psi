@@ -127,11 +127,11 @@ if(isset($_GET['id'])){
                                 foreach($pacientes as $paciente){
                                 ?>
                                 <td><?php echo $paciente['nome']; ?></td>
-                                <td><?php echo $paciente['email']; ?></td>
-                                <td>página</td>
+                                <td><a href="mailto:<?php echo $paciente['email']; ?>" style="color: black; text-decoration: none;"><?php echo $paciente['email']; ?></a></td>
+                                <td><a href="pag_paciente.php?id=<?php echo $paciente['id']; ?>" style="color: black; text-decoration: none;">página</td>
                                 <td>
-                                    <button type="button" onclick="" class="btn" style="background-color: #79b5af; color: white;">Editar</button>
-                                    <button type="button" onclick="" class="btn" style="background-color: #79b5af; color: white;">Excluir</button>
+                                    <button type="button" onclick="editar('<?php echo $paciente['id']; ?>')" class="btn" style="background-color: #79b5af; color: white;">Editar</button>
+                                    <button type="button" onclick="excluir('<?php echo $paciente['id']; ?>')" class="btn" style="background-color: #79b5af; color: white;">Excluir</button>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -147,5 +147,24 @@ if(isset($_GET['id'])){
         <?php
         include_once 'footer.php';
         ?>
+
+        
+    <script>
+
+        function excluir(n){
+
+            let text = "Realmente deseja excluir?";
+            if (confirm(text) == true){
+                window.location = '../backend/excluir_user.php?id=' + n;
+            }
+        }
+
+        function editar(n){
+
+            window.location = 'cadastro.php?id=' + n; 
+        }
+
+    </script>
+
     </body>
 </html>

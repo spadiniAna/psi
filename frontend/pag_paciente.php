@@ -1,6 +1,7 @@
 <?php
 
 include '../backend/pag.class.php';
+include '../backend/user.class.php';
 
 ?>
 
@@ -32,18 +33,35 @@ include '../backend/pag.class.php';
                                 <button type="button" data-bs-target="#pacienteSlide" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                                 <button type="button" data-bs-target="#pacienteSlide" data-bs-slide-to="1" aria-label="Slide 2"></button>
                                 <button type="button" data-bs-target="#pacienteSlide" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#pacienteSlide" data-bs-slide-to="3" aria-label="Slide 4"></button>
+
                             </div>
                             <div class="carousel-inner">
+                            <?php
+
+                            $user = new user();
+
+                            if(isset($_GET['id'])){
+
+                                $user->setId($_GET['id']);
+                                
+                                $users = $user->listar();
+                                
+                                foreach($users as $u){
+                                                                
+                                    $id = $u['id'];
+                                    $nome = $u['nome'];
+
+                            ?>
                                 <div class="carousel-item active">
                                     <img src="img/ramos.png" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5>Nome do paciente</h5>
+                                        <h5 class="display-5"><strong><?php if(isset($nome)){ echo $nome; } ?></strong></h5>
                                         <p>Seja bem-vindo ao seu espaço!</p>
                                     </div>
                                 </div>
-                            </div>
                             
-                        <?php
+                        <?php }
 
                         $pag = new pag();
 
@@ -55,11 +73,11 @@ include '../backend/pag.class.php';
 
                         ?>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                <div class="carousel-item">
                                     <img src="img/ramos.png" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5><?php echo $t['titulo'] ?></h5>
-                                        <a href="show_txt.php?id=<?php echo $t['id'] ?>" class="btn" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
+                                        <a href="show_txt.php?id=<?php echo $t['id'] ?>" class="btn" style="background-color: #458890; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
                                         Saiba mais</a>
                                     </div>
                                 </div>
@@ -76,11 +94,11 @@ include '../backend/pag.class.php';
 
                         ?>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                <div class="carousel-item">
                                     <img src="img/ramos.png" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5><?php echo $i['titulo'] ?></h5>
-                                        <a href="show_img.php?id=<?php echo $i['id'] ?>" class="btn" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
+                                        <a href="show_img.php?id=<?php echo $i['id'] ?>" class="btn" style="background-color: #458890; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
                                         Saiba mais</a>
                                     </div>
                                 </div>
@@ -97,21 +115,23 @@ include '../backend/pag.class.php';
 
                         ?>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                <div class="carousel-item">
                                     <img src="img/ramos.png" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5><?php echo $v['titulo'] ?></h5>
-                                        <a href="show_vid.php?id=<?php echo $v['id'] ?>" class="btn" style="background-color: #79b5af; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
+                                        <a href="show_vid.php?id=<?php echo $v['id'] ?>" class="btn" style="background-color: #458890; color: white; padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;">
                                         Saiba mais</a>
                                     </div>
                                 </div>
                             </div>
-                        <?php }} ?>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <?php }} }?>
+                        </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#pacienteSlide" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#pacienteSlide" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
@@ -144,12 +164,13 @@ include '../backend/pag.class.php';
                                             <div class="form-floating mb-4">                                
                                                 <textarea class="form-control form-control-lg" id="texto" name="texto" placeholder="Texto" rows="10" required></textarea>
                                                 <label for="texto" class="form-label fw-light">Texto</label>
-                                            </div>                                        
+                                            </div> 
+                                               
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn" style="background-color: #79b5af; color: white;" data-bs-dismiss="modal">Fechar</button>
+                                                <input type="submit" class="btn" value="Adicionar" style="background-color: #feb9b4; color: white;">
+                                            </div>                                                 
                                         </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" style="background-color: #79b5af; color: white;" data-bs-dismiss="modal">Fechar</button>
-                                        <a href="../backend/salvar_pag.php" class="btn" style="background-color: #feb9b4; color: white;">Adicionar</a>
                                     </div>
                                 </div>
                             </div>
@@ -177,12 +198,13 @@ include '../backend/pag.class.php';
                                             <div class="mb-3">
                                                 <label for="img" class="form-label fw-light">Imagem</label>                               
                                                 <input class="form-control" type="file" id="img" name="img" required/>
-                                            </div>                                       
+                                            </div>  
+                                                    
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn" style="background-color: #79b5af; color: white;" data-bs-dismiss="modal">Fechar</button>
+                                                <input type="submit" class="btn" value="Adicionar" style="background-color: #feb9b4; color: white;">
+                                            </div>                                                 
                                         </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" style="background-color: #79b5af; color: white;" data-bs-dismiss="modal">Fechar</button>
-                                        <a href="../backend/salvar_Img.php" class="btn" style="background-color: #feb9b4; color: white;">Adicionar</a>
                                     </div>
                                 </div>
                             </div>
@@ -210,12 +232,13 @@ include '../backend/pag.class.php';
                                             <div class="mb-3">
                                                 <label for="vid" class="form-label fw-light">Vídeo</label>                               
                                                 <input class="form-control" type="file" id="vid" name="vid" required/>
-                                            </div>                                       
+                                            </div>  
+                                                    
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn" style="background-color: #79b5af; color: white;" data-bs-dismiss="modal">Fechar</button>
+                                                <input type="submit" class="btn" value="Adicionar" style="background-color: #feb9b4; color: white;">
+                                            </div>                                     
                                         </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" style="background-color: #79b5af; color: white;" data-bs-dismiss="modal">Fechar</button>
-                                        <a href="../backend/salvar_Vid.php" class="btn" style="background-color: #feb9b4; color: white;">Adicionar</a>
                                     </div>
                                 </div>
                             </div>

@@ -49,30 +49,50 @@ class login extends conn{
 
         $resultado->execute();
 
-    $pdo = $this->disconnect();
+        $pdo = $this->disconnect();
 
-    if($resultado->rowCount() == 1){
+        if($resultado->rowCount() == 1){
 
-        $info = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $info = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-        if($this->senha == $info[0]['senha']){
+            if($this->senha == $info[0]['senha']){
 
-            $_SESSION['logado'] = true;
+                $_SESSION['logado'] = true;
 
-            $_SESSION['email'] = $info[0]['email'];
-
-            if($this->nivel == $info[0]['nivel'] && $this->nivel == 'psi'){
-                
-                $_SESSION['adm'] = true;
+                $_SESSION['email'] = $info[0]['email'];
 
                 return true;
 
             }else{
 
                 return false;
-    
+
             }
 
+        }
+
+    }
+
+    public function adm(){
+
+        $pdo = $this->connect();
+        
+        $sql = 'SELECT *
+                FROM user
+                WHERE nivel = "psi" ';
+
+        $resultado = $pdo->prepare($sql);
+
+        $resultado->execute();
+
+        $pdo = $this->disconnect();
+
+        
+        $info = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        if($this->nivel == $info[0]['nivel']){
+
+            $_SESSION['adm'] = true;
 
             return true;
 
@@ -83,7 +103,5 @@ class login extends conn{
         }
 
     }
-
-}
 
 }

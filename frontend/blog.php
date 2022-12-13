@@ -62,7 +62,7 @@ include '../backend/blog.class.php';
 
                             if(count($blogs) > 0){
                         
-                            foreach($blogs as $b){
+                                foreach($blogs as $b){
 
                         ?>
                             <div class="card w-100 border-0">

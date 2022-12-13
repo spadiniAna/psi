@@ -1,3 +1,8 @@
+<?php
+
+include '../backend/blog.class.php';
+
+?>
 <!DOCTYPE HTML>
 <html lang="pt-br">
     <header>
@@ -39,9 +44,11 @@
                     </div>
                 </div>
 
-                <section style="background-color: #9cd4cc;" class="my-5">
-                    <div class="container"><p class="text-light">Entre em contato</p></div>
-                </section>
+                    <section style="background-image: url('img/fundo.png');" class="my-5">
+                        <div class="container">                
+                            <h1 class="display-1 text-center" style="padding: 125px;"></h1>
+                        </div>
+                    </section>
 
                 <div class="container">
                     <div  class="col-12 position-relative top-0 start-50 translate-middle-x">
@@ -56,13 +63,22 @@
                             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
+                            <?php
+                            $blog = new blog();
+
+                            $blogs = $blog->listar();
+
+                            if(count($blogs) > 0){
+                                foreach($blogs as $b){
+                            ?>
                             <div class="carousel-item active">
-                            <img src="img/ramos.png" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5><a href="show_blog.php?id=" style="text-decoration: none; color: white;">Publicação 1</a></h5>
-                                <p>Some representative placeholder content for the first slide.</p>
+                                <img src="img/ramos.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5><a href="show_blog.php?id=<?php echo $b['id'] ?>" style="text-decoration: none; color: white;"><?php echo $b['titulo'] ?></a></h5>
+                                        <p><?php echo $b['subtitulo'] ?></p>
+                                    </div>
                             </div>
-                            </div>
+                            <?php }} ?>
                             <div class="carousel-item">
                             <img src="img/ramos.png" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
